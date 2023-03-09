@@ -8,17 +8,14 @@
 # 2A: India had the greatest overall increase within the decade, while the US had the lowest increase.
 #     This is very insteresting and could be looked into further
 #
-# 3. 
-#
 # ---------------------------------------------------------------------------------------------
 
 import pandas as pd
-import numpy as np
+
 
 dataFrame = pd.read_csv("co2_emissions_kt_by_country.csv", usecols=[
                         "country_name", "year", "value"])
-# print(dataFrame.head(25))
-# print(dataFrame.sort_values("value").tail(10))
+
 without_world = dataFrame[
     (dataFrame.country_name != "World")
     & (dataFrame.country_name != "East Asia & Pacific (excluding high income)")
@@ -55,51 +52,36 @@ without_world = dataFrame[
     & (dataFrame.country_name != "Russian Federation")
     & (dataFrame.country_name != "Middle East & North Africa")
     & (dataFrame.country_name != "India")
-    # and dataFrame.country_name != ""
-    # and dataFrame.country_name != ""
-    # and dataFrame.country_name != ""
 ]
-print(without_world.sort_values("value", ascending=False).head(30))
 
-# without_world.plot()
-
-top5 = []
 
 only_china = dataFrame[dataFrame.country_name == "China"]
 china_sum = only_china["value"].sum()
-top5.append(float(china_sum))
 print(f"Sum of China's Emissions from 1960-2019: {china_sum}")
 
 only_us = dataFrame[dataFrame.country_name == "United States"]
 us_sum = only_us["value"].sum()
-top5.append(float(us_sum))
 print(f"Sum of the United State's Emissions from 1960-2019: {us_sum}")
 
 only_rus = dataFrame[dataFrame.country_name == "Russian Federation"]
 rus_sum = only_rus["value"].sum()
-top5.append(float(rus_sum))
 print(f"Sum of Russia's Emissions from 1960-2019: {rus_sum}")
 
 only_middle_east = dataFrame[dataFrame.country_name == "Middle East & North Africa"]
 middle_east_sum = only_middle_east["value"].sum()
-top5.append(float(middle_east_sum))
 print(f"Sum of the Middle East and North Africa's Emissions from 1960-2019: {middle_east_sum}")
 
 only_india = dataFrame[dataFrame.country_name == "India"]
 india_sum = only_india["value"].sum()
-top5.append(float(india_sum))
 print(f"Sum of India's Emissions from 1960-2019: {india_sum}")
 
 china_percent = dataFrame[(dataFrame.country_name == "China") & (dataFrame.year >= 2009) & (dataFrame.year <= 2019)]
-# print(china_percent.sort_values("value", ascending=False).head(10))
 print()
 print("China Percentages:")
 print(china_percent["value"].pct_change())
 # sum = 0.338301
 
-# print(only_china.pct_change())
 US_percent = dataFrame[(dataFrame.country_name == "United States") & (dataFrame.year >= 2009) & (dataFrame.year <= 2019)]
-# print(china_percent.sort_values("value", ascending=False).head(10))
 print()
 print("US Percentages:")
 print(US_percent["value"].pct_change())
@@ -107,21 +89,18 @@ print(US_percent["value"].pct_change())
 
 
 Russia_percent = dataFrame[(dataFrame.country_name == "Russian Federation") & (dataFrame.year >= 2009) & (dataFrame.year <= 2019)]
-# print(china_percent.sort_values("value", ascending=False).head(10))
 print()
 print("Russia Percentages:")
 print(Russia_percent["value"].pct_change())
 # sum = 0.100829
 
 MEast_percent = dataFrame[(dataFrame.country_name == "Middle East & North Africa") & (dataFrame.year >= 2009) & (dataFrame.year <= 2019)]
-# print(china_percent.sort_values("value", ascending=False).head(10))
 print()
 print("Middle East Percentages:")
 print(MEast_percent["value"].pct_change())
 # sum = 0.231168
 
 India_percent = dataFrame[(dataFrame.country_name == "India") & (dataFrame.year >= 2009) & (dataFrame.year <= 2019)]
-# print(china_percent.sort_values("value", ascending=False).head(10))
 print()
 print("India Percentages:")
 print(India_percent["value"].pct_change())
